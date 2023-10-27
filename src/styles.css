@@ -1,0 +1,194 @@
+:root {
+  --background: #1a0d2e;
+  --primary: #9621d1;
+  --primary-hovered: #70129e;
+  --display-background: #2d213f;
+  --button-dark-background: #331443;
+  --button-dark-background-hovered: #511f6a;
+  --link: #fdcccc;
+  --link-hovered: #f9dcdc;
+  --text: #fefefe;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.animate {
+  view-transition-name: animate;
+}
+
+.header {
+  view-transition-name: header;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.header-title {
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.header> :last-child {
+  margin-right: auto;
+}
+
+.link,
+.link:visited,
+.link:link {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.link:active,
+.link:hover {
+  color: #eab8b8;
+}
+
+.button {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  text-align: center;
+  border-radius: 0.25rem;
+  height: 3rem;
+}
+
+.button:hover {
+  background-color: var(--primary-hovered);
+  color: var(--link-hovered);
+  transition: all 200ms;
+}
+
+.calculation {
+  min-height: 16rem;
+  min-width: 40%;
+  max-width: 30rem;
+  background-color: var(--primary);
+  border-radius: 0.25rem;
+  margin: 0 auto 3rem auto;
+}
+
+.calculator {
+  min-width: 40%;
+  max-width: 30rem;
+  margin: 0 auto 3rem auto;
+}
+
+.calculator-button-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.25rem;
+}
+
+.calculator-number-display {
+  display: block;
+  width: 100%;
+  min-height: 4rem;
+  background-color: var(--display-background);
+  margin-bottom: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.calculator-button {
+  min-height: 3rem;
+  cursor: pointer;
+  background-color: var(--button-dark-background);
+  border: none;
+  font-size: large;
+  border-radius: 0.25rem;
+}
+
+.calculator-button:hover {
+  background-color: var(--button-dark-background-hovered);
+}
+
+.special-button {
+  background-color: var(--primary);
+}
+
+.special-button:hover {
+  background-color: var(--primary-hovered);
+}
+
+.home-cta-container {
+  display: grid;
+  max-width: 20rem;
+  margin: 3rem auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.calculation-title {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+[data-hide="true"] {
+  display: none;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-from-right {
+  from {
+    transform: translateX(30px);
+  }
+}
+
+@keyframes slide-to-left {
+  to {
+    transform: translateX(-30px);
+  }
+}
+
+
+::view-transition-old(root) {
+  animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+::view-transition-new(root) {
+  animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+
+::view-transition-old(animate),
+::view-transition-new(animate) {
+  /* Use normal blending,
+  so the new view sits on top and obscures the old view */
+  mix-blend-mode: normal;
+  /* Make the height the same as the group,
+  meaning the view size might not match its aspect-ratio. */
+  height: 100%;
+  /* Clip any overflow of the view */
+  overflow: clip;
+}
